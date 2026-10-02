@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mantenimiento Blogs - EMPRESA XYZ</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .header { background-color: #333; color: white; padding: 15px 20px; }
+        .container { display: flex; min-height: 85vh; }
+        .sidebar { width: 220px; background-color: #f4f4f4; padding: 20px; border-right: 1px solid #ccc; }
+        .sidebar h3 { margin-top: 0; font-size: 16px; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+        .sidebar ul { list-style-type: none; padding: 0; }
+        .sidebar li { margin-bottom: 12px; }
+        .sidebar a { text-decoration: none; color: #0066cc; font-weight: bold; }
+        .sidebar a:hover { text-decoration: underline; }
+        .content { flex: 1; padding: 25px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #e9e9e9; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 4px; font-weight: bold; }
+        input[type="text"], textarea { width: 100%; padding: 6px; box-sizing: border-box; }
+        .btn { padding: 6px 12px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 3px; }
+        .btn-danger { background-color: #dc3545; color: white; text-decoration: none; padding: 4px 8px; font-size: 12px; }
+        .btn-edit { background-color: #ffc107; color: black; text-decoration: none; padding: 4px 8px; font-size: 12px; }
+        .error { color: red; font-size: 12px; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h2 style="margin: 0;">EMPRESA XYZ</h2>
+</div>
+<div class="container">
+    <div class="sidebar">
+        <h3>Menú principal</h3>
+        <ul>
+            <li><a th:href="@{/readers}">Readers</a></li>
+            <li><a th:href="@{/blogs}">Blogs</a></li>
+            <li><a th:href="@{/blogs-readers}">Readers por blog</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <h2>Mantenimiento de Blogs</h2>
+
+        <form th:action="@{/blogs/save}" th:object="${blog}" method="post" style="max-width: 500px; background: #fafafa; padding: 15px; border: 1px solid #ccc;">
+            <input type="hidden" th:field="*{id}" />
+            <div class="form-group">
+                <label>Título (Máx. 50 caracteres):</label>
+                <input type="text" th:field="*{title}" maxlength="50" required />
+                <span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            </div>
+            <div class="form-group">
+                <label>Descripción (Máx. 4000 caracteres):</label>
+                <textarea th:field="*{description}" rows="4" maxlength="4000"></textarea>
+                <span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+            </div>
+            <button type="submit" class="btn">Guardar Blog</button>
+        </form>
+
+        <h3 style="margin-top: 30px;">Listado de Blogs</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="b : ${blogs}">
+                <td th:text="${b.id}"></td>
+                <td th:text="${b.title}"></td>
+                <td th:text="${b.description}"></td>
+                <td>
+                    <a th:href="@{/blogs/edit/{id}(id=${b.id})}" class="btn btn-edit">Editar</a>
+                    <a th:href="@{/blogs/delete/{id}(id=${b.id})}" class="btn btn-danger" onclick="return confirm('¿Eliminar registro?')">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

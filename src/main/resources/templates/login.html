@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión - EMPRESA XYZ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        .login-card h2 {
+            margin-top: 0;
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #0052a3;
+        }
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="login-card">
+    <h2>EMPRESA XYZ</h2>
+    <h4 style="text-align: center; color: #666; margin-top: -10px;">bandesal</h4>
+
+    <!-- Mensaje en caso de credenciales incorrectas -->
+    <div class="error" th:if="${param.error}">
+        Usuario o contraseña incorrectos.
+    </div>
+
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label>Usuario:</label>
+            <input type="text" name="username" placeholder="Ingrese su usuario" required autofocus />
+        </div>
+        <div class="form-group">
+            <label>Contraseña:</label>
+            <input type="password" name="password" placeholder="Ingrese su contraseña" required />
+        </div>
+        <button type="submit" class="btn">Ingresar</button>
+    </form>
+</div>
+</body>
+</html>
