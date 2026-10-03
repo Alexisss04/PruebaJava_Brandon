@@ -30,7 +30,7 @@ Se ha cumplido con el 100% de los requerimientos solicitados:
 
 * **Backend:** Java, Spring Boot (Web, Data JPA, Security).
 * **Frontend:** HTML5, CSS3, Thymeleaf.
-* **Base de Datos:** Oracle Database XE (Docker) / H2 In-Memory (Soporte dual).
+* **Base de Datos:** Oracle Database XE (Docker) 
 * **Gestor de Dependencias:** Maven.
 
 ---
