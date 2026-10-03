@@ -71,3 +71,5 @@ mvn spring-boot:run
 * Endpoint: GET /api/blogs
 * Autenticación: HTTP Basic Auth requerida.
 * Ejemplo de petición (cURL): curl -u admin:password http://localhost:8080/api/blogs
+
+Hecho por Brandon Cerritos
